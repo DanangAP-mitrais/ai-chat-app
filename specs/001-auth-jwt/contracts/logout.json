@@ -1,0 +1,38 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Logout API",
+    "version": "1.0.0",
+    "description": "API for user logout in the AI Chat application"
+  },
+  "paths": {
+    "/auth/logout": {
+      "post": {
+        "summary": "Logout user",
+        "description": "Invalidate the user's authentication token",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully logged out"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or expired token"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
