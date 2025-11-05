@@ -31,7 +31,12 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Constitution principles to verify:
+- Code Quality Standards: Clean architecture, consistent formatting, documentation requirements
+- Testing Standards: Unit test coverage minimum 80%, integration tests, automated pipeline
+- User Experience Consistency: Design system adherence, accessibility compliance (WCAG 2.1 AA)
+- Performance Requirements: Page load times <3s, API response <500ms (95th percentile)
+- Security-first Development: Input validation, authentication/authorization, security scanning
 
 ## Project Structure
 

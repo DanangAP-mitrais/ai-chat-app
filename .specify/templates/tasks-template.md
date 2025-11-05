@@ -50,7 +50,9 @@ description: "Task list template for feature implementation"
 
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T003 [P] Configure linting and formatting tools to enforce code quality standards
+- [ ] T004 [P] Set up automated code quality checks and static analysis tools
+- [ ] T005 [P] Configure accessibility testing tools for UX consistency
 
 ---
 
@@ -62,12 +64,14 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T006 Setup database schema and migrations framework
+- [ ] T007 [P] Implement authentication/authorization framework with security-first principles
+- [ ] T008 [P] Setup API routing and middleware structure
+- [ ] T009 Create base models/entities that all stories depend on
+- [ ] T010 Configure error handling and logging infrastructure
+- [ ] T011 Setup environment configuration management
+- [ ] T012 [P] Configure performance monitoring and benchmarking tools
+- [ ] T013 Set up design system and component library for UX consistency
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -83,17 +87,22 @@ Examples of foundational tasks (adjust based on your project):
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T014 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T015 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T016 [P] [US1] Unit test with minimum 80% coverage for business logic in tests/unit/test_[name].py
+- [ ] T017 [P] [US1] Accessibility test for UX consistency in tests/accessibility/test_[name].py
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T018 [P] [US1] Create [Entity1] model in src/models/[entity1].py with clean architecture principles
+- [ ] T019 [P] [US1] Create [Entity2] model in src/models/[entity2].py with clean architecture principles
+- [ ] T020 [US1] Implement [Service] in src/services/[service].py with comprehensive documentation
+- [ ] T021 [US1] Implement [endpoint/feature] in src/[location]/[file].py with input validation and sanitization
+- [ ] T022 [US1] Add validation and error handling
+- [ ] T023 [US1] Add logging for user story 1 operations
+- [ ] T024 [US1] Optimize for performance: ensure API response times under 500ms for 95th percentile
+- [ ] T025 [US1] Ensure accessibility compliance (WCAG 2.1 AA) for user interface
+- [ ] T026 [US1] Apply design system components for consistent UX
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -107,15 +116,20 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T027 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T028 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T029 [P] [US2] Unit test with minimum 80% coverage for business logic in tests/unit/test_[name].py
+- [ ] T030 [P] [US2] Accessibility test for UX consistency in tests/accessibility/test_[name].py
 
 ### Implementation for User Story 2
 
-- [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
-- [ ] T021 [US2] Implement [Service] in src/services/[service].py
-- [ ] T022 [US2] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T023 [US2] Integrate with User Story 1 components (if needed)
+- [ ] T031 [P] [US2] Create [Entity] model in src/models/[entity].py with clean architecture principles
+- [ ] T032 [US2] Implement [Service] in src/services/[service].py with comprehensive documentation
+- [ ] T033 [US2] Implement [endpoint/feature] in src/[location]/[file].py with input validation and sanitization
+- [ ] T034 [US2] Integrate with User Story 1 components (if needed)
+- [ ] T035 [US2] Optimize for performance: ensure API response times under 500ms for 95th percentile
+- [ ] T036 [US2] Ensure accessibility compliance (WCAG 2.1 AA) for user interface
+- [ ] T037 [US2] Apply design system components for consistent UX
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -129,14 +143,19 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T038 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T039 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T040 [P] [US3] Unit test with minimum 80% coverage for business logic in tests/unit/test_[name].py
+- [ ] T041 [P] [US3] Accessibility test for UX consistency in tests/accessibility/test_[name].py
 
 ### Implementation for User Story 3
 
-- [ ] T026 [P] [US3] Create [Entity] model in src/models/[entity].py
-- [ ] T027 [US3] Implement [Service] in src/services/[service].py
-- [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T042 [P] [US3] Create [Entity] model in src/models/[entity].py with clean architecture principles
+- [ ] T043 [US3] Implement [Service] in src/services/[service].py with comprehensive documentation
+- [ ] T044 [US3] Implement [endpoint/feature] in src/[location]/[file].py with input validation and sanitization
+- [ ] T045 [US3] Apply performance optimization strategies
+- [ ] T046 [US3] Ensure accessibility compliance (WCAG 2.1 AA) for user interface
+- [ ] T047 [US3] Apply design system components for consistent UX
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -150,12 +169,14 @@ Examples of foundational tasks (adjust based on your project):
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] TXXX [P] Documentation updates in docs/
-- [ ] TXXX Code cleanup and refactoring
-- [ ] TXXX Performance optimization across all stories
-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
-- [ ] TXXX Security hardening
-- [ ] TXXX Run quickstart.md validation
+- [ ] TXXX [P] Documentation updates in docs/ with code quality standards compliance
+- [ ] TXXX Code cleanup and refactoring to maintain clean architecture
+- [ ] TXXX Performance optimization across all stories (page load times under 3 seconds)
+- [ ] TXXX [P] Additional unit tests to maintain 80% coverage (if needed) in tests/unit/
+- [ ] TXXX Security hardening with regular scanning and vulnerability assessments
+- [ ] TXXX UX consistency review across all user stories for design system compliance
+- [ ] TXXX Run quickstart.md validation with accessibility testing
+- [ ] TXXX Code review to ensure maintainability and adherence to quality standards
 
 ---
 
@@ -182,7 +203,8 @@ Examples of foundational tasks (adjust based on your project):
 - Models before services
 - Services before endpoints
 - Core implementation before integration
-- Story complete before moving to next priority
+- Quality/UX/performance considerations throughout
+- Story complete when all constitution requirements are met
 
 ### Parallel Opportunities
 
@@ -195,48 +217,34 @@ Examples of foundational tasks (adjust based on your project):
 
 ---
 
-## Parallel Example: User Story 1
-
-```bash
-# Launch all tests for User Story 1 together (if tests requested):
-Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
-Task: "Integration test for [user journey] in tests/integration/test_[name].py"
-
-# Launch all models for User Story 1 together:
-Task: "Create [Entity1] model in src/models/[entity1].py"
-Task: "Create [Entity2] model in src/models/[entity2].py"
-```
-
----
-
 ## Implementation Strategy
 
 ### MVP First (User Story 1 Only)
 
-1. Complete Phase 1: Setup
-2. Complete Phase 2: Foundational (CRITICAL - blocks all stories)
-3. Complete Phase 3: User Story 1
-4. **STOP and VALIDATE**: Test User Story 1 independently
+1. Complete Phase 1: Setup with code quality infrastructure
+2. Complete Phase 2: Foundational (CRITICAL - blocks all stories) with security-first principles
+3. Complete Phase 3: User Story 1 with all constitution compliance requirements
+4. **STOP and VALIDATE**: Test User Story 1 independently with performance and accessibility checks
 5. Deploy/demo if ready
 
 ### Incremental Delivery
 
-1. Complete Setup + Foundational → Foundation ready
-2. Add User Story 1 → Test independently → Deploy/Demo (MVP!)
-3. Add User Story 2 → Test independently → Deploy/Demo
-4. Add User Story 3 → Test independently → Deploy/Demo
-5. Each story adds value without breaking previous stories
+1. Complete Setup + Foundational → Foundation ready with all constitution requirements
+2. Add User Story 1 → Test independently → Deploy/Demo (MVP!) with quality checks
+3. Add User Story 2 → Test independently → Deploy/Demo with quality checks
+4. Add User Story 3 → Test independently → Deploy/Demo with quality checks
+5. Each story adds value without breaking previous stories, all meeting constitution standards
 
 ### Parallel Team Strategy
 
 With multiple developers:
 
-1. Team completes Setup + Foundational together
+1. Team completes Setup + Foundational together with quality infrastructure
 2. Once Foundational is done:
-   - Developer A: User Story 1
-   - Developer B: User Story 2
-   - Developer C: User Story 3
-3. Stories complete and integrate independently
+   - Developer A: User Story 1 with quality compliance
+   - Developer B: User Story 2 with quality compliance
+   - Developer C: User Story 3 with quality compliance
+3. Stories complete and integrate independently while meeting all constitution requirements
 
 ---
 
@@ -249,3 +257,4 @@ With multiple developers:
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
+- Each task must consider code quality, testing, UX consistency, performance, and security requirements per constitution

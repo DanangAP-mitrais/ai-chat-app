@@ -20,17 +20,45 @@
   ============================================================================
 -->
 
-## [Category 1]
+## Code Quality Standards
 
-- [ ] CHK001 First checklist item with clear action
-- [ ] CHK002 Second checklist item
-- [ ] CHK003 Third checklist item
+- [ ] CHK001 Code follows clean architecture with clear separation of concerns
+- [ ] CHK002 Consistent formatting following established style guides
+- [ ] CHK003 Comprehensive documentation for all public interfaces
+- [ ] CHK004 Code reviews completed with focus on maintainability
+- [ ] CHK005 No code duplication or unnecessary complexity
 
-## [Category 2]
+## Testing Standards
 
-- [ ] CHK004 Another category item
-- [ ] CHK005 Item with specific criteria
-- [ ] CHK006 Final item in this category
+- [ ] CHK006 Unit tests cover all business logic with minimum 80% coverage
+- [ ] CHK007 Integration tests for all API interactions
+- [ ] CHK008 End-to-end tests for critical user flows
+- [ ] CHK009 Automated testing pipeline passing for all pull requests
+- [ ] CHK010 Test coverage report generated and reviewed
+
+## User Experience Consistency
+
+- [ ] CHK011 Follows established design system and component library
+- [ ] CHK012 Consistent interaction patterns and visual styles
+- [ ] CHK013 Accessibility standards compliance (WCAG 2.1 AA)
+- [ ] CHK014 User feedback mechanisms for all major actions
+- [ ] CHK015 Responsive design tested on multiple screen sizes
+
+## Performance Requirements
+
+- [ ] CHK016 Page load times under 3 seconds
+- [ ] CHK017 API response times under 500ms for 95th percentile
+- [ ] CHK018 Optimized resource loading with caching strategies
+- [ ] CHK019 Mobile-first responsive design approach implemented
+- [ ] CHK020 Performance metrics monitored and baseline established
+
+## Security-first Development
+
+- [ ] CHK021 Input validation and sanitization for all user inputs
+- [ ] CHK022 Authentication and authorization for all protected resources
+- [ ] CHK023 Regular security scanning and vulnerability assessments
+- [ ] CHK024 Data protection and privacy compliance verified
+- [ ] CHK025 Security headers properly configured
 
 ## Notes
 
@@ -38,3 +66,4 @@
 - Add comments or findings inline
 - Link to relevant resources or documentation
 - Items are numbered sequentially for easy reference
+- Each item should be verifiable and testable

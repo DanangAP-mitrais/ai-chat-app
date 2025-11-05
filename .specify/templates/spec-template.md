@@ -113,3 +113,35 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+
+## Constitution Compliance
+
+### Code Quality Standards
+- All code must follow clean architecture principles with clear separation of concerns
+- Consistent formatting following established style guides
+- Comprehensive documentation for all public interfaces
+- Code reviews required for all changes with focus on maintainability
+
+### Testing Standards
+- Minimum 80% unit test coverage for all business logic
+- Integration tests for all API interactions
+- End-to-end tests for critical user flows
+- Automated testing pipeline for all pull requests
+
+### User Experience Consistency
+- Must follow established design system and component library
+- Consistent interaction patterns and visual styles
+- Accessibility compliance (WCAG 2.1 AA)
+- User feedback mechanisms for all major actions
+
+### Performance Requirements
+- Page load times must be under 3 seconds
+- API response times under 500ms for 95th percentile
+- Optimized resource loading with caching strategies
+- Mobile-first responsive design approach
+
+### Security-first Development
+- Input validation and sanitization for all user inputs
+- Authentication and authorization for all protected resources
+- Regular security scanning and vulnerability assessments
+- Data protection and privacy compliance
