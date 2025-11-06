@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     
     # CORS
-    BACKEND_CORS_ORIGINS: str = os.getenv("BACKEND_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")
+    BACKEND_CORS_ORIGINS: str = os.getenv("BACKEND_CORS_ORIGINS", "http://localhost:5174,http://127.0.0.1:5174")
     
     class Config:
         env_file = ".env"

@@ -1,4 +1,4 @@
-.PHONY: install run-dev run-test setup-db migrate
+.PHONY: install run-dev run-test setup-db migrate create-migration
 
 # Install dependencies using Poetry
 install:
@@ -19,3 +19,7 @@ setup-db:
 # Run database migrations
 migrate:
 	poetry run alembic upgrade head
+
+# Create a new migration
+create-migration:
+	poetry run alembic revision --autogenerate -m "New migration"

@@ -3,6 +3,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__)))
 
 from src.core.database import engine, Base
+# Import models to ensure they are registered with Base.metadata
+from src.models import user
 import asyncio
 
 

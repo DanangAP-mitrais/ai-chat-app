@@ -4,6 +4,7 @@ from datetime import timedelta
 from ..core.database import get_db_session
 from ..services.auth_service import AuthService
 from ..core.security import security_service
+from ..core.config import settings
 from ..models.user import User
 from .deps import get_current_user
 from pydantic import BaseModel
@@ -83,7 +84,7 @@ async def login(
         )
     
     # Create access token
-    access_token_expires = timedelta(minutes=security_service.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = security_service.create_access_token(
         data={"sub": user.id}, expires_delta=access_token_expires
     )
@@ -91,7 +92,7 @@ async def login(
     return TokenResponse(
         access_token=access_token,
         token_type="bearer",
-        expires_in=security_service.ACCESS_TOKEN_EXPIRE_MINUTES * 60  # Convert to seconds
+        expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60  # Convert to seconds
     )
 
 
