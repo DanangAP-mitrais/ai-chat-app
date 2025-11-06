@@ -74,7 +74,7 @@ Users want to return to previous conversations with the intelligent assistant to
 ### Functional Requirements
 
 - **FR-001**: System MUST allow users to input text queries in a natural language format
-- **FR-002**: System MUST process user queries through a third-party AI service to generate appropriate responses
+- **FR-002**: System MUST process user queries through the OpenAI Agent SDK to generate appropriate responses
 - **FR-003**: System MUST maintain conversation context and history within a session
 - **FR-004**: System MUST present intelligent responses in a clear, readable format to the user
 - **FR-005**: System MUST handle user inputs and responses asynchronously without blocking the interface
@@ -83,8 +83,8 @@ Users want to return to previous conversations with the intelligent assistant to
 - **FR-008**: System MUST implement content moderation to prevent harmful outputs
 - **FR-009**: System MUST require user authentication before accessing chat functionality
 - **FR-010**: System MUST store all user queries and AI responses encrypted to ensure privacy
-- **FR-011**: System MUST integrate with a third-party AI service API to provide intelligent responses
-- **FR-012**: System MUST limit each user to 500 requests per day to prevent abuse
+- **FR-011**: System MUST integrate with the OpenAI Agent SDK for processing user queries
+- **FR-012**: System MUST support rate limiting to prevent abuse
 - **FR-013**: System MUST log errors and system failures for operational purposes
 
 ### Key Entities

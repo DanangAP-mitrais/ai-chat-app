@@ -64,6 +64,7 @@
 - [ ] T017 [P] [US1] Integration test for basic chat flow in backend/tests/integration/test_basic_chat.py
 - [ ] T018 [P] [US1] Unit test with minimum 80% coverage for chat service in backend/tests/unit/test_chat_service.py
 - [ ] T019 [P] [US1] Frontend component test for ChatInterface in frontend/tests/unit/test_chat_interface.tsx
+- [ ] T020 [P] [US1] Accessibility test for chat interface components per WCAG 2.1 AA in frontend/tests/accessibility/test_chat_accessibility.tsx
 
 ### Implementation for User Story 1
 
@@ -86,7 +87,7 @@
 
 ## Phase 4: User Story 2 - Contextual Conversation Management (Priority: P2)
 
-**Goal**: Maintain context across multiple exchanges in a conversation, allowing natural, flowing discussions
+**Goal**: Maintain context across multiple exchanges in a conversation, allowing natural, flowing discussions independent of other user stories
 
 **Independent Test**: Can be tested by having a multi-turn conversation where the assistant remembers previous exchanges
 
@@ -96,6 +97,7 @@
 - [ ] T033 [P] [US2] Integration test for contextual conversation flow in backend/tests/integration/test_contextual_chat.py
 - [ ] T034 [P] [US2] Unit test with minimum 80% coverage for context management in backend/tests/unit/test_context_service.py
 - [ ] T035 [P] [US2] Frontend component test for message history display in frontend/tests/unit/test_message_history.tsx
+- [ ] T036 [P] [US2] Accessibility test for message history display per WCAG 2.1 AA in frontend/tests/accessibility/test_history_accessibility.tsx
 
 ### Implementation for User Story 2
 
@@ -115,7 +117,7 @@
 
 ## Phase 5: User Story 3 - Session Persistence (Priority: P3)
 
-**Goal**: Allow users to return to previous conversations to continue where they left off or review previous discussions
+**Goal**: Allow users to return to previous conversations to continue where they left off or review previous discussions, implemented independently of other user stories
 
 **Independent Test**: Can be tested by starting a conversation, closing the app, returning later, and resuming the conversation
 
@@ -126,6 +128,7 @@
 - [ ] T047 [P] [US3] Contract test for DELETE /chats/{chatId} endpoint in backend/tests/contract/test_chat_api.py
 - [ ] T048 [P] [US3] Integration test for session persistence flow in backend/tests/integration/test_session_persistence.py
 - [ ] T049 [P] [US3] Frontend component test for sidebar and chat list in frontend/tests/unit/test_sidebar.tsx
+- [ ] T050 [P] [US3] Accessibility test for sidebar and session management per WCAG 2.1 AA in frontend/tests/accessibility/test_sidebar_accessibility.tsx
 
 ### Implementation for User Story 3
 
@@ -178,8 +181,8 @@
 ### User Story Dependencies
 
 - **User Story 1 (P1)**: Can start after Foundational (Phase 2) - No dependencies on other stories
-- **User Story 2 (P2)**: Depends on User Story 1 being complete for core chat functionality
-- **User Story 3 (P3)**: Depends on User Stories 1-2 being complete for full chat functionality
+- **User Story 2 (P2)**: Can start after Foundational (Phase 2) - Independent of other stories, but may share foundational components
+- **User Story 3 (P3)**: Can start after Foundational (Phase 2) - Independent of other stories, but may share foundational components
 
 ### Within Each User Story
 
