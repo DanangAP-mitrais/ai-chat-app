@@ -1,0 +1,440 @@
+openapi: 3.0.3
+info:
+  title: AI Chat Interface API
+  description: API for interacting with the AI chat assistant
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging-api.example.com/v1
+    description: Staging server
+
+paths:
+  /auth/login:
+    post:
+      summary: User login
+      description: Authenticate user and return JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: securePassword123
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                  token_type:
+                    type: string
+                    example: bearer
+        '401':
+          description: Invalid credentials
+        '422':
+          description: Validation error
+
+  /chats:
+    get:
+      summary: Get user's chat sessions
+      description: Retrieve a list of the authenticated user's chat sessions
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          description: Maximum number of results to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          description: Index to start returning results from
+      responses:
+        '200':
+          description: List of chat sessions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chats:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChatSession'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '429':
+          description: Rate limit exceeded
+    post:
+      summary: Create a new chat session
+      description: Start a new conversation with the AI assistant
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  maxLength: 200
+                  example: "Initial conversation"
+              required:
+                - title
+      responses:
+        '201':
+          description: Chat session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '429':
+          description: Rate limit exceeded
+
+  /chats/{chatId}:
+    get:
+      summary: Get chat session details
+      description: Retrieve details of a specific chat session including messages
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: Chat session details with messages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSessionWithMessages'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user doesn't own this chat
+        '404':
+          description: Chat session not found
+        '429':
+          description: Rate limit exceeded
+    delete:
+      summary: Delete a chat session
+      description: Delete a specific chat session (soft delete)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '204':
+          description: Chat session deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user doesn't own this chat
+        '404':
+          description: Chat session not found
+        '429':
+          description: Rate limit exceeded
+
+  /chats/{chatId}/messages:
+    get:
+      summary: Get messages in a chat session
+      description: Retrieve all messages in a specific chat session
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 550e8400-e29b-41d4-a716-446655440000
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+          description: Maximum number of results to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          description: Index to start returning results from
+      responses:
+        '200':
+          description: List of messages in the chat session
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user doesn't own this chat
+        '404':
+          description: Chat session not found
+        '429':
+          description: Rate limit exceeded
+    post:
+      summary: Send a message in chat session
+      description: Send a message to the AI assistant and receive a response
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 550e8400-e29b-41d4-a716-446655440000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+                  maxLength: 10000
+                  example: "What's the weather like today?"
+      responses:
+        '201':
+          description: Message sent and response received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_message:
+                    $ref: '#/components/schemas/Message'
+                  ai_response:
+                    $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid input or content too long
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user doesn't own this chat
+        '404':
+          description: Chat session not found
+        '429':
+          description: Rate limit exceeded
+
+  /chats/{chatId}/title:
+    put:
+      summary: Update chat session title
+      description: Update the title of a chat session
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 550e8400-e29b-41d4-a716-446655440000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  maxLength: 200
+                  example: "Updated conversation title"
+      responses:
+        '200':
+          description: Chat session title updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user doesn't own this chat
+        '404':
+          description: Chat session not found
+        '429':
+          description: Rate limit exceeded
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        username:
+          type: string
+          example: johndoe
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        is_active:
+          type: boolean
+          example: true
+      required:
+        - id
+        - email
+        - username
+        - created_at
+        - updated_at
+        - is_active
+
+    ChatSession:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        user_id:
+          type: string
+          format: uuid
+          example: 650e8400-e29b-41d4-a716-446655440001
+        title:
+          type: string
+          example: "Initial conversation"
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        is_active:
+          type: boolean
+          example: true
+      required:
+        - id
+        - user_id
+        - title
+        - created_at
+        - updated_at
+        - is_active
+
+    ChatSessionWithMessages:
+      allOf:
+        - $ref: '#/components/schemas/ChatSession'
+        - type: object
+          properties:
+            messages:
+              type: array
+              items:
+                $ref: '#/components/schemas/Message'
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 750e8400-e29b-41d4-a716-446655440002
+        chat_session_id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        sender_type:
+          type: string
+          enum: [user, assistant]
+          example: user
+        content:
+          type: string
+          example: "What's the weather like today?"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        sequence_number:
+          type: integer
+          example: 1
+      required:
+        - id
+        - chat_session_id
+        - sender_type
+        - content
+        - timestamp
+        - sequence_number
