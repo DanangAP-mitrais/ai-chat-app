@@ -16,7 +16,7 @@ const LoginForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const navigate = useNavigate()
-  const login = useAuthStore(state => state.login)
+  const { login } = useAuthStore()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -71,8 +71,14 @@ const LoginForm: React.FC = () => {
         
         <div className="rounded-md shadow-sm space-y-4">
           <div>
-            <Label htmlFor="email">Email address</Label>
-            <Input
+            <label
+              className="block text-sm font-medium leading-5 text-gray-700"
+              htmlFor="email"
+            >
+              Email address
+            </label>
+            <input
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               id="email"
               name="email"
               type="email"
@@ -81,13 +87,18 @@ const LoginForm: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="name@example.com"
-              className="mt-1"
             />
           </div>
           
           <div>
-            <Label htmlFor="password">Password</Label>
-            <Input
+            <label
+              className="block text-sm font-medium leading-5 text-gray-700"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               id="password"
               name="password"
               type="password"
@@ -96,19 +107,18 @@ const LoginForm: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="••••••••"
-              className="mt-1"
             />
           </div>
         </div>
 
         <div>
-          <Button
+          <button
             type="submit"
             disabled={loading}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             {loading ? 'Signing in...' : 'Sign in'}
-          </Button>
+          </button>
         </div>
       </form>
       

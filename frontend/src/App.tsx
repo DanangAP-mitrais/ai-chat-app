@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
@@ -8,23 +8,21 @@ import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<div>AI Chat App</div>} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route 
-            path="/app" 
-            element={
-              <ProtectedRoute>
-                <ProtectedAppPage />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<div>AI Chat App</div>} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route 
+          path="/app" 
+          element={
+            <ProtectedRoute>
+              <ProtectedAppPage />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </div>
   )
 }
 
