@@ -1,48 +1,53 @@
-# Quickstart Guide: AI Chat Interface
+# Quick Start: AI Chat Interface Implementation
 
 ## Prerequisites
 
-- Python 3.9+
-- Node.js 18+ (for frontend development)
-- PostgreSQL 12+
+- Python 3.9+ installed
+- Node.js 18+ and npm/yarn installed
 - OpenAI API key
-- Docker and Docker Compose (optional, for containerized setup)
 
-## Backend Setup
+## Setup Instructions
+
+### Backend Setup
 
 1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
 
-2. Create and activate a virtual environment:
+2. Install Python dependencies using Poetry (recommended):
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   poetry install
    ```
-
-3. Install dependencies:
+   
+   Or using pip:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Set up environment variables:
+3. Set up environment variables:
    ```bash
    cp .env.example .env
-   # Edit .env and add your OpenAI API key and database connection string
+   # Edit .env and add your OpenAI API key and other configuration
    ```
 
-5. Run database migrations:
+4. Initialize the database:
    ```bash
    python setup_db.py
+   # Or use Alembic to apply migrations
+   alembic upgrade head
    ```
 
-6. Start the backend server:
+5. Run the backend server:
    ```bash
+   # Using the run script
    python run_server.py
+   
+   # Or directly with uvicorn
+   uvicorn src.main:app --reload --port 8000
    ```
 
-## Frontend Setup
+### Frontend Setup
 
 1. Navigate to the frontend directory:
    ```bash
@@ -51,92 +56,99 @@
 
 2. Install dependencies:
    ```bash
+   # Using npm
    npm install
+   
+   # Or using yarn
+   yarn install
    ```
 
 3. Set up environment variables:
    ```bash
    cp .env.example .env
-   # Edit .env and set the backend API URL
+   # Edit .env and add your API endpoint and other configuration
    ```
 
-4. Start the development server:
+4. Run the development server:
    ```bash
+   # Using npm
    npm run dev
+   
+   # Or using yarn
+   yarn dev
    ```
 
-## Environment Configuration
+## Key Implementation Points
 
-### Backend (.env)
-```
-DATABASE_URL=postgresql://username:password@localhost:5432/ai_chat_db
-OPENAI_API_KEY=your_openai_api_key_here
-SECRET_KEY=your_secret_key_here
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-```
+### Backend Structure
 
-### Frontend (.env)
-```
-VITE_API_BASE_URL=http://localhost:8000
-```
+- `src/models/`: Data models (User, ChatSession, Message)
+- `src/services/`: Business logic (chat_service, ai_integration_service, encryption_service)
+- `src/api/`: API endpoints (auth_routes, chat_routes)
+
+### Frontend Structure
+
+- `src/components/`: Reusable UI components
+  - `ChatInterface/`: Core chat functionality components
+  - `Sidebar/`: Sidebar with new chat button, chats list, and user profile
+- `src/pages/`: Page-level components (ChatPage)
+- `src/services/`: API client and state management (Zustand store)
+
+### Data Encryption
+
+- User queries and AI responses must be stored encrypted in the database
+- Use the encryption_service for all sensitive data handling
+- Follow security-first development practices
+
+### API Integration
+
+- The backend integrates with OpenAI Agent SDK for AI responses
+- Rate limiting is implemented (500 requests per user per day)
+- All API endpoints require authentication except for login
+
+### Frontend Components
+
+- The UI includes a sidebar with:
+  - New Chat Button: Start a new conversation
+  - Chats List: Display existing conversations
+  - User Profile Section: Show user information
+- Main area as conversation interface with text input field
+- Input field appears centered when no chat content, repositions to bottom when content exists
 
 ## Running Tests
 
 ### Backend Tests
+
 ```bash
-# Run all tests
+# Run all backend tests
 pytest
 
 # Run with coverage
 pytest --cov=src
-
-# Run specific test file
-pytest tests/unit/test_chat_service.py
 ```
 
 ### Frontend Tests
+
 ```bash
-# Run all tests
+# Run all frontend tests
 npm run test
 
-# Run component tests
-npm run test:unit
-
-# Run end-to-end tests
-npm run test:e2e
+# Or with yarn
+yarn test
 ```
 
-## API Documentation
+## Key Endpoints
 
-The API documentation is automatically available at `http://localhost:8000/docs` when the backend is running. This includes endpoints for:
-- Authentication
-- Chat session management
-- Message handling
-- User management
+- `POST /auth/login` - User authentication
+- `GET /chats` - Get user's chat sessions
+- `POST /chats` - Create new chat session
+- `GET /chats/{chatId}` - Get specific chat session
+- `GET /chats/{chatId}/messages` - Get messages in chat session
+- `POST /chats/{chatId}/messages` - Send message to AI
 
-## Database Migrations
+## Architecture Notes
 
-To create a new migration after changing models:
-```bash
-alembic revision --autogenerate -m "Description of changes"
-```
-
-To apply migrations:
-```bash
-alembic upgrade head
-```
-
-## Docker Setup (Optional)
-
-To run the entire application using Docker:
-
-1. Build and start services:
-   ```bash
-   docker-compose up --build
-   ```
-
-2. The application will be available at:
-   - Frontend: http://localhost:3000
-   - Backend: http://localhost:8000
-   - Database: PostgreSQL on localhost:5432
+- Clean architecture with clear separation of concerns
+- Asynchronous handling for non-blocking interface
+- Error handling with user-friendly messages and retry options
+- Type safety with Python type hints and TypeScript

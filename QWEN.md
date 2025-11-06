@@ -5,6 +5,8 @@ Auto-generated from all feature plans. Last updated: 2025-11-05
 ## Active Technologies
 - Python 3.9+ (backend), TypeScript 5.0+ (frontend) + FastAPI, SQLAlchemy, Alembic (backend); ReactJS, Vite, Radix-UI, Lucide-React, Zustand (frontend) (002-ai-chat)
 - PostgreSQL database for storing encrypted chat sessions and messages (002-ai-chat)
+- Python 3.9+ (backend), TypeScript 5.0+ (frontend) + FastAPI, SQLAlchemy, Alembic (backend); React, Zustand (frontend); OpenAI Agent SDK (002-ai-chat)
+- SQLite with dynamic configuration settings (002-ai-chat)
 
 - Python 3.9+ (backend), TypeScript 5.0+ (frontend) + FastAPI, SQLAlchemy, Alembic, ReactJS, Vite, Radix-UI, Lucide-React, Zustand (001-auth-jwt)
 
@@ -58,6 +60,7 @@ All development must adhere to the project constitution principles:
 - Data protection and privacy compliance
 
 ## Recent Changes
+- 002-ai-chat: Added Python 3.9+ (backend), TypeScript 5.0+ (frontend) + FastAPI, SQLAlchemy, Alembic (backend); React, Zustand (frontend); OpenAI Agent SDK
 - 002-ai-chat: Added Python 3.9+ (backend), TypeScript 5.0+ (frontend) + FastAPI, SQLAlchemy, Alembic (backend); ReactJS, Vite, Radix-UI, Lucide-React, Zustand (frontend)
 
 - 001-auth-jwt: Added Python 3.9+ (backend), TypeScript 5.0+ (frontend) + FastAPI, SQLAlchemy, Alembic, ReactJS, Vite, Radix-UI, Lucide-React, Zustand
