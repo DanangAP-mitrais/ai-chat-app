@@ -3,10 +3,10 @@ import os
 import asyncio
 sys.path.append(os.path.join(os.path.dirname(__file__)))
 
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker
 from src.models.user import User
-from src.services.auth_service import AuthService
+from backend.src.services.auth import AuthService
 
 
 async def test_direct_call():
@@ -16,7 +16,7 @@ async def test_direct_call():
         await conn.run_sync(User.metadata.create_all)
     
     # Create a session
-    async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+    async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
     
     async with async_session() as session:
         # Test registration similar to how the API endpoint does it

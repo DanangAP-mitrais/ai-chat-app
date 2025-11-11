@@ -2,8 +2,9 @@ from typing import Optional, Tuple
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.exc import IntegrityError
+from fastapi import HTTPException, status
 from ..models.user import User
-from .password_service import PasswordService
+from .password import PasswordService
 
 
 class AuthService:
@@ -40,9 +41,10 @@ class AuthService:
             await self.db_session.commit()
             await self.db_session.refresh(new_user)
             return new_user, None
-        except IntegrityError:
+        except Exception as e:
             await self.db_session.rollback()
-            return None, "Email already registered"
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                detail=f"Failed to register user: {e}")
 
     async def authenticate_user(self, email: str, password: str) -> Optional[User]:
         user = await self.get_user_by_email(email)

@@ -3,7 +3,7 @@ import os
 import asyncio
 from datetime import datetime
 from fastapi.testclient import TestClient
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
@@ -28,7 +28,7 @@ async def setup_test_database():
         await conn.run_sync(Base.metadata.create_all)
     
     # Create session maker
-    async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+    async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
     
     return async_session
 

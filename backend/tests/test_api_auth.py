@@ -3,7 +3,7 @@ import os
 import pytest
 from datetime import datetime
 from fastapi.testclient import TestClient
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
@@ -16,7 +16,7 @@ from src.core.database import Base, get_db_session
 
 # Create a test database engine
 @pytest.fixture(scope="function")
-def test_db():
+async def test_db():
     engine = create_async_engine(
         "sqlite+aiosqlite:///:memory:",
         poolclass=StaticPool,
@@ -32,12 +32,12 @@ def test_db():
     asyncio.run(create_tables())
     
     # Create session maker
-    async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+    async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
     
     yield async_session
     
     # Cleanup after test
-    engine.dispose()
+    await engine.dispose()
 
 
 @pytest.fixture(scope="function")

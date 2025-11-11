@@ -1,22 +1,22 @@
 from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
-from ..core.database import get_db_session
-from ..core.security import security_service
-from ..services.auth_service import AuthService
-from ..models.user import User
-from typing import Optional
+
+from src.core.database import get_db_session
+from src.core.security import security_service
+from backend.src.services.auth import AuthService
+from src.models.user import User
 
 
 async def get_current_user(
     db_session: AsyncSession = Depends(get_db_session),
-    token: str = Depends(security_service.security)
+    token: HTTPAuthorizationCredentials  = Depends(security_service.security)
 ) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    
     token_data = security_service.verify_token(token.credentials)
     if token_data is None:
         raise credentials_exception

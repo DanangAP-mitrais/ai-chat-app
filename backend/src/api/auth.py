@@ -1,43 +1,22 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import timedelta
-from ..core.database import get_db_session
-from ..services.auth_service import AuthService
-from ..core.security import security_service
-from ..core.config import settings
-from ..models.user import User
-from .deps import get_current_user
-from pydantic import BaseModel
-from typing import Optional
+
+from src.core.database import get_db_session
+from backend.src.services.auth import AuthService
+from src.core.security import security_service
+from src.core.config import settings
+from src.models.user import User
+from src.api.deps import get_current_user
+from src.schemas.auth import (
+    RegisterRequest,
+    LoginRequest,
+    TokenResponse,
+    UserResponse
+)
 
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
-
-
-# Pydantic models
-class RegisterRequest(BaseModel):
-    fullname: str
-    email: str
-    password: str
-
-
-class LoginRequest(BaseModel):
-    email: str
-    password: str
-
-
-class TokenResponse(BaseModel):
-    access_token: str
-    token_type: str
-    expires_in: int
-
-
-class UserResponse(BaseModel):
-    id: str
-    fullname: str
-    email: str
-    created_at: str
-
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 async def register(
@@ -57,11 +36,16 @@ async def register(
             detail=error
         )
     
-    return UserResponse(
-        id=user.id,
-        fullname=user.fullname,
-        email=user.email,
-        created_at=user.created_at.isoformat()
+    if user:
+        return UserResponse(
+            id=user.id,
+            fullname=user.fullname,
+            email=user.email,
+            created_at=user.created_at.isoformat()
+        )
+    raise HTTPException(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        detail="User Registration Failed"
     )
 
 
